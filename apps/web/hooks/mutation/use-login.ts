@@ -1,5 +1,5 @@
 import type { ApiResponse, Login } from '@packages/types';
-import { api, METHOD, type LoginSchema } from '@packages/utils';
+import { type LoginSchema, METHOD, api } from '@packages/utils';
 import { useMutation } from '@tanstack/react-query';
 import { request } from '@utils/request';
 
@@ -30,9 +30,6 @@ const useLogin = () => {
          //  });
 
          return response;
-      },
-      onError(err) {
-         console.log('🚀 ~ onError ~ err:', err);
       },
    });
 };

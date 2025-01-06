@@ -1,81 +1,45 @@
+import type { Option } from '@packages/types';
+import { i18n } from '@packages/utils';
+import { Avatar } from 'primereact/avatar';
+import { Menu } from 'primereact/menu';
+import { useRef } from 'react';
+
 const UserButton = () => {
-   return null;
+   const menuRight = useRef<Menu>(null);
+
+   const items: Option[] = [
+      {
+         code: 'profile',
+         label: i18n.t('common:profile'),
+         icon: 'pi pi-user',
+      },
+      {
+         code: 'logout',
+         label: i18n.t('common:action.logout'),
+         icon: 'pi pi-sign-out',
+      },
+   ];
+
+   return (
+      <>
+         <Menu
+            id='popup_menu_right'
+            ref={menuRight}
+            model={items}
+            popup={true}
+            popupAlignment='right'
+            className='mt-2'
+         />
+
+         <Avatar
+            label='V'
+            shape='circle'
+            aria-controls='popup_menu_right'
+            aria-haspopup={true}
+            onClick={(event) => menuRight.current?.toggle(event)}
+         />
+      </>
+   );
 };
 
 export { UserButton };
-
-{
-   /* <UDropdown
-	:items="items"
-	:popper="{ arrow: true }"
-	:ui="{
-		background: 'bg-screen',
-		ring: 'ring-black-900',
-		divide: 'divide-black-900',
-		item: {
-			label: 'text-gray-100',
-			active: 'bg-gray-950',
-		},
-	}"
->
-	<UAvatar
-		:src="myProfileQuery.data.value?.avatar"
-		:alt="myProfileQuery.data.value?.first_name"
-		:ui="{
-			background: 'bg-blue-200',
-			placeholder: 'text-blue-600',
-		}"
-	/>
-</UDropdown> */
-}
-
-{
-   /* <script lang="ts" setup>
-const myProfileQuery = useMyProfile();
-
-const items = [
-	[
-		{
-			label: 'Profile',
-			avatar: {
-				src: 'https://avatars.githubusercontent.com/u/739984?v=4',
-			},
-		},
-	],
-	[
-		{
-			label: 'Edit',
-			icon: 'i-heroicons-pencil-square-20-solid',
-			shortcuts: ['E'],
-			click: () => {
-				console.log('Edit');
-			},
-		},
-		{
-			label: 'Duplicate',
-			icon: 'i-heroicons-document-duplicate-20-solid',
-			shortcuts: ['D'],
-		},
-	],
-	[
-		{
-			label: 'Archive',
-			icon: 'i-heroicons-archive-box-20-solid',
-		},
-		{
-			label: 'Move',
-			icon: 'i-heroicons-arrow-right-circle-20-solid',
-		},
-	],
-	[
-		{
-			label: 'Delete',
-			icon: 'i-heroicons-trash-20-solid',
-			shortcuts: ['⌘', 'D'],
-		},
-	],
-];
-</script>
-
-<style></style> */
-}

@@ -1,4 +1,4 @@
-import { _setApp, type AppSlice } from '../slices/app';
+import { type AppSlice, _setApp } from '../slices/app';
 import { useAppDispatch, useAppSelector } from '../store';
 
 const useApp = () => {

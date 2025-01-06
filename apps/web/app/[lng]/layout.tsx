@@ -1,9 +1,10 @@
-import { dir } from 'i18next';
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
-import { APP_NAME } from '@packages/utils';
 import { UIProvider } from '@/providers/ui-provider';
 import { QueryProvider, ReduxProvider } from '@packages/providers';
+import { APP_NAME } from '@packages/utils';
+import { dir } from 'i18next';
+import type { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
+import type { ReactNode } from 'react';
 
 import '../../assets/styles/global.css';
 import 'primeicons/primeicons.css';
@@ -28,11 +29,13 @@ const Layout = async ({
          </head>
 
          <body>
-            <ReduxProvider platform='web' loading={'loading'}>
-               <UIProvider>
-                  <QueryProvider>{children}</QueryProvider>
-               </UIProvider>
-            </ReduxProvider>
+            <SessionProvider>
+               <ReduxProvider platform='web' loading={'loading'}>
+                  <UIProvider>
+                     <QueryProvider>{children}</QueryProvider>
+                  </UIProvider>
+               </ReduxProvider>
+            </SessionProvider>
          </body>
       </html>
    );

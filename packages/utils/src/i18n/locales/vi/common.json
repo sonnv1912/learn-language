@@ -1,8 +1,8 @@
 {
    "email": "Email",
    "phone_number": "Số điện thoại",
-   "app_slogan": "Gõ 1 lần - Học mọi nơi",
    "pricing": "Bảng giá",
+   "profile": "Trang cá nhân",
 
    "action": {
       "add_new": "Thêm mới",

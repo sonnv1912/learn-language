@@ -7,7 +7,7 @@ const UserLayout = ({ children }: PropsWithChildren) => {
       <div className='flex flex-col layout min-h-screen'>
          <Header />
 
-         <div className='pt-[69px] flex-1'>{children}</div>
+         <div className='flex-1'>{children}</div>
 
          <Footer />
       </div>

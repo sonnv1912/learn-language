@@ -5,12 +5,17 @@
    "scripts": {
       "build": "turbo build",
       "dev": "turbo dev",
-      "lint": "yarn biome check --write ./"
+      "prepare": "husky"
    },
    "devDependencies": {
       "@biomejs/biome": "1.9.4",
+      "husky": "^9.1.7",
+      "lint-staged": "^15.3.0",
       "turbo": "^2.3.3",
       "typescript": "5.5.4"
+   },
+   "lint-staged": {
+      "*.{ts,tsx,json}": "biome check --write"
    },
    "engines": {
       "node": ">=18"

@@ -1,4 +1,4 @@
-import type { POST, GET, DELETE, PATCH } from '@packages/types';
+import type { DELETE, GET, PATCH, POST } from '@packages/types';
 
 export const API_BASE_URL = 'http://localhost:8055';
 

@@ -1,4 +1,4 @@
-import { api, METHOD, type RegisterSchema } from '@packages/utils';
+import { METHOD, type RegisterSchema, api } from '@packages/utils';
 import { useMutation } from '@tanstack/react-query';
 import { request } from '@utils/request';
 

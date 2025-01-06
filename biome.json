@@ -7,7 +7,15 @@
    },
    "files": {
       "ignoreUnknown": true,
-      "ignore": ["node_modules", ".expo", "assets.d.ts"]
+      "ignore": [
+         "node_modules",
+         ".expo",
+         "*.d.ts",
+         "dist",
+         "build",
+         ".vscode",
+         "public"
+      ]
    },
    "formatter": {
       "enabled": true,

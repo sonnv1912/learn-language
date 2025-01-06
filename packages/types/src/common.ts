@@ -1,9 +1,12 @@
-type Option = {
-   key: string;
+type Option<T = string> = {
+   code: T;
    label?: string;
-   items?: Option[];
+   description?: string | null;
    icon?: string;
-   to?: string;
+   image?: string;
+   hide?: boolean;
+   badge?: number;
+   items?: Option[];
    action?: () => void;
 };
 

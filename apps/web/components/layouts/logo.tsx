@@ -1,7 +1,7 @@
+import LogoIcon from '@packages/assets/icons/ic-logo.png';
 import { APP_NAME } from '@packages/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import LogoIcon from '@packages/assets/icons/ic-logo.png';
 
 const Logo = () => {
    return (

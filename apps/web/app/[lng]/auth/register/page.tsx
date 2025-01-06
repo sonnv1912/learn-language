@@ -4,7 +4,12 @@ import { useLogin } from '@/hooks/mutation/use-login';
 import { useRegister } from '@/hooks/mutation/use-register';
 import { Input } from '@components/form/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { defaultRegisterValue, i18n, registerSchema } from '@packages/utils';
+import {
+   defaultRegisterValue,
+   i18n,
+   registerSchema,
+   route,
+} from '@packages/utils';
 import { useIsMutating } from '@tanstack/react-query';
 import Link from 'next/link';
 import { Button } from 'primereact/button';
@@ -39,15 +44,15 @@ const Page = () => {
                </p>
 
                <div className='flex items-center gap-4'>
-                  <Link href='/auth/login'>
-                     {i18n.t('auth:have_an_account')}
-                  </Link>
+                  <p>{i18n.t('auth:have_an_account')}</p>
 
-                  <Button label={i18n.t('common:action.login')} />
+                  <Link href={route.login}>
+                     <Button label={i18n.t('common:action.login')} />
+                  </Link>
                </div>
             </div>
 
-            <Card className='bg-black-950'>
+            <Card>
                <div className='flex flex-col gap-5'>
                   <Controller
                      control={control}

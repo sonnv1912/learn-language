@@ -3,8 +3,8 @@ import type {
    RequestOptions,
    RequestProps,
 } from '@packages/types';
-import { API_BASE_URL, METHOD } from '../constants';
 import queryString from 'qs';
+import { API_BASE_URL, METHOD } from '../constants';
 
 const handleRequestOptions = (options: RequestOptions) => {
    const requestOptions: Omit<RequestInit, 'headers'> & {

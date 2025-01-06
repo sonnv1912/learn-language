@@ -1,9 +1,9 @@
 import {
    COOKIE,
-   LANGUAGES,
    DEFAULT_LNG,
-   route,
+   LANGUAGES,
    privateRoutes,
+   route,
 } from '@packages/utils';
 import { auth } from '@utils/auth';
 import { ensureRoute, removeLng, validRoute } from '@utils/route';
