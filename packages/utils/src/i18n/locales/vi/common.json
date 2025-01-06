@@ -1,0 +1,14 @@
+{
+   "email": "Email",
+   "phone_number": "Số điện thoại",
+   "app_slogan": "Gõ 1 lần - Học mọi nơi",
+   "pricing": "Bảng giá",
+
+   "action": {
+      "add_new": "Thêm mới",
+      "logout": "Đăng xuất",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "login_to_continue": "Đăng nhập để thao tác"
+   }
+}

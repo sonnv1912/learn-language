@@ -1,0 +1,17 @@
+{
+   "login": {
+      "field": {
+         "password": "Mật khẩu"
+      }
+   },
+
+   "product": {
+      "field": {}
+   },
+
+   "dashboard": {
+      "field": {},
+
+      "message": {}
+   }
+}

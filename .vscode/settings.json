@@ -1,0 +1,44 @@
+{
+   "cSpell.words": [
+      "Cantarell",
+      "clsx",
+      "commiting",
+      "directus",
+      "emojione",
+      "humbleicons",
+      "iconify",
+      "Lexi",
+      "Lexifun",
+      "Lngs",
+      "Neue",
+      "nodenext",
+      "NUXT",
+      "nuxtjs",
+      "octicon",
+      "pinia",
+      "primeicons",
+      "primereact",
+      "Raleway",
+      "Roboto",
+      "Segoe",
+      "sidebase",
+      "tanstack",
+      "topbar",
+      "turbopack",
+      "vercel",
+      "vueuse"
+   ],
+   "[dockercompose]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+   },
+   "editor.defaultFormatter": "biomejs.biome",
+   "[json]": {
+      "editor.defaultFormatter": "biomejs.biome"
+   },
+   "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+   },
+   "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+   }
+}
