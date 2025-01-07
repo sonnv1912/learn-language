@@ -35,6 +35,10 @@ export default auth((req) => {
       response.cookies.set(COOKIE.i18n, lng);
    }
 
+   if (req.nextUrl.pathname.startsWith('/resources')) {
+      return response;
+   }
+
    if (!req.auth && isPrivateRoute) {
       const newUrl = new URL(ensureRoute(route.login), req.nextUrl.origin);
 

@@ -25,7 +25,7 @@ const AuthButton = () => {
                <Link href={route.login}>
                   <Button
                      size='small'
-                     text={true}
+                     outlined={true}
                      label={i18n.t('common:action.login')}
                   />
                </Link>

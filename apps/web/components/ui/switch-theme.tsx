@@ -23,7 +23,7 @@ const SwitchTheme = () => {
             <Button
                icon='pi pi-moon'
                rounded={true}
-               text={true}
+               size='small'
                onClick={() => {
                   setApp({
                      theme: 'dark',
@@ -36,7 +36,7 @@ const SwitchTheme = () => {
             <Button
                icon='pi pi-sun'
                rounded={true}
-               text={true}
+               size='small'
                onClick={() => {
                   setApp({
                      theme: 'light',

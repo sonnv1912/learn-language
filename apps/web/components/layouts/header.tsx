@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { useEventListener } from 'primereact/hooks';
 import { useEffect, useState } from 'react';
 import { HeaderRightNav } from './header-right-nav';
 import { Logo } from './logo';
@@ -8,8 +9,9 @@ import { Logo } from './logo';
 const Header = () => {
    const [onTop, setOnTop] = useState(true);
 
-   useEffect(() => {
-      const handle = () => {
+   const [scroll, unScroll] = useEventListener({
+      type: 'scroll',
+      listener: () => {
          if (window.scrollY === 0) {
             setOnTop(true);
 
@@ -17,21 +19,25 @@ const Header = () => {
          }
 
          setOnTop(false);
+      },
+   });
+
+   useEffect(() => {
+      scroll();
+
+      return () => {
+         unScroll();
       };
-
-      document.addEventListener('scroll', handle);
-
-      return () => document.removeEventListener('scroll', handle);
-   }, []);
+   }, [scroll, unScroll]);
 
    return (
       <div
          className={clsx(
-            'py-4 px-10 flex items-center bg-black-950 border-b border-b-black-900 justify-between',
-            'sticky top-0 left-0 right-0 w-full z-50 header border-b',
+            'py-4 px-10 flex items-center border-b bg-transparent justify-between',
+            'sticky top-0 left-0 right-0 w-full z-50 border-b transition-colors',
             {
                'border-b-transparent': onTop,
-               'border-b-[--surface-border]': !onTop,
+               'border-b-[--surface-border] header': !onTop,
             },
          )}
       >

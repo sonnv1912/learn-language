@@ -1,16 +1,17 @@
 import { Footer } from '@components/layouts/footer';
 import { Header } from '@components/layouts/header';
+import { LayoutBody } from '@components/layouts/layout-body';
 import type { PropsWithChildren } from 'react';
 
 const UserLayout = ({ children }: PropsWithChildren) => {
    return (
-      <div className='flex flex-col layout min-h-screen'>
+      <LayoutBody>
          <Header />
 
          <div className='flex-1'>{children}</div>
 
          <Footer />
-      </div>
+      </LayoutBody>
    );
 };
 
