@@ -2,6 +2,7 @@ import { UIProvider } from '@/providers/ui-provider';
 import { QueryProvider, ReduxProvider } from '@packages/providers';
 import { APP_NAME } from '@packages/utils';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
@@ -58,8 +59,6 @@ const Layout = async ({
          </head>
 
          <body className='text-[--text-color]'>
-            <Analytics />
-
             <SessionProvider>
                <ReduxProvider platform='web' loading={'loading'}>
                   <UIProvider>
@@ -67,6 +66,10 @@ const Layout = async ({
                   </UIProvider>
                </ReduxProvider>
             </SessionProvider>
+
+            <Analytics />
+
+            <SpeedInsights />
          </body>
       </html>
    );
