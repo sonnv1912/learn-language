@@ -53,6 +53,7 @@ const instance = async <T>({
             data: null,
             ok: false,
             status: response.status,
+            errors: result.errors || [{ message: response.statusText }],
          };
 
          throw error;

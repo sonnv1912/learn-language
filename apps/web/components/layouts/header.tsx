@@ -34,7 +34,7 @@ const Header = () => {
       <div
          className={clsx(
             'py-4 px-10 flex items-center border-b bg-transparent justify-between',
-            'sticky top-0 left-0 right-0 w-full z-50 border-b transition-colors',
+            'sticky top-0 left-0 right-0 w-full z-40 border-b transition-colors',
             {
                'border-b-transparent': onTop,
                'border-b-[--surface-border] header': !onTop,

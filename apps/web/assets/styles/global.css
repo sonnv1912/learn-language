@@ -1,5 +1,6 @@
-@import url('./tailwind.css');
 @import url('./font.css');
+@import url('./tailwind.css');
+@import url('./toast.css');
 
 html {
 	font-size: 14px;

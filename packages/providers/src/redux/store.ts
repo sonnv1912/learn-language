@@ -5,14 +5,15 @@ import {
    combineReducers,
    configureStore,
 } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { appSlice } from './slices/app';
+import { toastSlice } from './slices/toast';
 
-const createReducer = (customReducer: Record<string, Reducer> = {}) =>
+const createReducer = (customReducer: Record<string, Reducer>) =>
    combineReducers({
       app: appSlice.reducer,
+      toast: toastSlice.reducer,
       ...customReducer,
    });
 
@@ -20,6 +21,7 @@ const createPersistedReducer = (
    platform: 'mobile' | 'web',
    whitelist: string[],
    blacklist: string[],
+   customReducer: Record<string, Reducer>,
 ) =>
    persistReducer(
       {
@@ -28,29 +30,27 @@ const createPersistedReducer = (
          whitelist: ['app', ...whitelist],
          blacklist: [...blacklist],
       },
-      createReducer(),
+      createReducer(customReducer),
    );
 
 const createStore = (
    platform: 'mobile' | 'web',
    whitelist: string[],
    blacklist: string[],
+   customReducer: Record<string, Reducer>,
 ) =>
    configureStore({
-      reducer: createPersistedReducer(platform, whitelist, blacklist),
+      reducer: createPersistedReducer(
+         platform,
+         whitelist,
+         blacklist,
+         customReducer,
+      ),
       middleware(getDefaultMiddleware) {
          return getDefaultMiddleware({
             serializableCheck: false,
          });
       },
    });
-
-const store = createStore('web', [], []);
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppStore = typeof store;
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
 
 export { createPersistedReducer, createStore };

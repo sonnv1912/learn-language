@@ -1,13 +1,14 @@
-type Option<T = string> = {
-   code: T;
+type Option<TCode = string, TType = string> = {
+   code: TCode;
    label?: string;
+   type?: TType;
    description?: string | null;
    icon?: string;
    image?: string;
    hide?: boolean;
    badge?: number;
    items?: Option[];
-   action?: () => void;
+   command?: () => void;
 };
 
 export type { Option };

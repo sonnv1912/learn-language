@@ -1,5 +1,11 @@
 export type ApiResponse<T = null> = {
    data: T | null;
+   errors: {
+      message: string;
+      extensions: {
+         code: string;
+      };
+   }[];
    ok: boolean;
    status: number;
 };
@@ -19,18 +25,8 @@ export type RequestOptions = (
         body?: object;
      }
 ) & {
-   token: string;
+   token?: string;
 };
-
-export type RequestOptionsWithNoToken =
-   | {
-        method: GET;
-        params?: object;
-     }
-   | {
-        method: POST | DELETE | PATCH;
-        body?: object;
-     };
 
 export type RequestProps = {
    endpoint: string;

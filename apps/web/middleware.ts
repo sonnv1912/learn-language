@@ -35,7 +35,10 @@ export default auth((req) => {
       response.cookies.set(COOKIE.i18n, lng);
    }
 
-   if (req.nextUrl.pathname.startsWith('/resources')) {
+   if (
+      req.nextUrl.pathname.startsWith('/resources') ||
+      req.nextUrl.pathname.startsWith('/app')
+   ) {
       return response;
    }
 

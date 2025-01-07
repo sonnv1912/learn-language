@@ -13,7 +13,7 @@ const Page = () => {
    const { t } = i18n;
    const loginMutate = useLogin();
 
-   const { control, handleSubmit } = useForm({
+   const { control, handleSubmit, formState } = useForm({
       defaultValues: defaultLoginValue,
       resolver: zodResolver(loginSchema),
    });
@@ -44,10 +44,11 @@ const Page = () => {
                   <Controller
                      control={control}
                      name='email'
-                     render={({ field }) => (
+                     render={({ field, fieldState }) => (
                         <Input
                            value={field.value}
                            label={t('auth:field.email')}
+                           errorMessage={fieldState.error?.message}
                            onChange={field.onChange}
                         />
                      )}
@@ -56,10 +57,11 @@ const Page = () => {
                   <Controller
                      control={control}
                      name='password'
-                     render={({ field }) => (
+                     render={({ field, fieldState }) => (
                         <Input
                            value={field.value}
                            label={t('auth:field.password')}
+                           errorMessage={fieldState.error?.message}
                            type='password'
                            onChange={field.onChange}
                         />
@@ -74,7 +76,9 @@ const Page = () => {
                   </Link>
 
                   <Button
+                     disabled={!formState.isValid}
                      className='mt-3'
+                     loading={loginMutate.isPending}
                      label={t('common:action.login')}
                      onClick={onSubmit}
                   />

@@ -1,0 +1,39 @@
+@layer primereact {
+	.p-toast {
+		width: calc(100% - var(--toast-indent, 0px));
+		max-width: 25rem;
+	}
+
+	.p-toast-message-icon {
+		flex-shrink: 0;
+	}
+
+	.p-toast-message-content {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.p-toast-message-text {
+		flex: 1 1 auto;
+	}
+
+	.p-toast-summary {
+		overflow-wrap: anywhere;
+	}
+
+	.p-toast-detail {
+		overflow-wrap: anywhere;
+	}
+
+	.p-toast-icon-close {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.p-toast-icon-close.p-link {
+		cursor: pointer;
+	}
+}

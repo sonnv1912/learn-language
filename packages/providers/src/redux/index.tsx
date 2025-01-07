@@ -1,31 +1,21 @@
 'use client';
 
-import { type ReactNode, useRef } from 'react';
+import type { EnhancedStore } from '@reduxjs/toolkit';
+import type { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import { createStore } from './store';
 
 type Props = {
    children: ReactNode;
-   platform: 'mobile' | 'web';
-   blackList?: string[];
-   whiteList?: string[];
    loading: ReactNode;
+   store: EnhancedStore;
 };
 
-const ReduxProvider = ({
-   children,
-   platform,
-   loading,
-   blackList = [],
-   whiteList = [],
-}: Props) => {
-   const ref = useRef(createStore(platform, whiteList, blackList));
-
+const ReduxProvider = ({ children, store, loading }: Props) => {
    return (
-      <Provider store={ref.current}>
-         <PersistGate persistor={persistStore(ref.current)} loading={loading}>
+      <Provider store={store}>
+         <PersistGate persistor={persistStore(store)} loading={loading}>
             {children}
          </PersistGate>
       </Provider>
@@ -33,5 +23,7 @@ const ReduxProvider = ({
 };
 
 export * from './hooks';
+export * from './objects';
 export * from './store';
+export * from './slices';
 export { ReduxProvider };

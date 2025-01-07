@@ -1,3 +1,5 @@
+'use client';
+
 import { UserLayout } from '@/layouts/user';
 import { APP_NAME, i18n, route } from '@packages/utils';
 import Link from 'next/link';

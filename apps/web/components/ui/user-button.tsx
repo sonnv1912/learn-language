@@ -1,5 +1,6 @@
 import type { Option } from '@packages/types';
 import { i18n } from '@packages/utils';
+import { signOut } from 'next-auth/react';
 import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
 import { useRef } from 'react';
@@ -17,6 +18,9 @@ const UserButton = () => {
          code: 'logout',
          label: i18n.t('common:action.logout'),
          icon: 'pi pi-sign-out',
+         command: () => {
+            signOut();
+         },
       },
    ];
 
@@ -34,6 +38,7 @@ const UserButton = () => {
          <Avatar
             label='V'
             shape='circle'
+            size='large'
             aria-controls='popup_menu_right'
             aria-haspopup={true}
             onClick={(event) => menuRight.current?.toggle(event)}

@@ -1,11 +1,12 @@
 import { useApp } from '@packages/providers';
+import { useAppDispatch, useAppSelector } from '@redux/store';
 import { PrimeReactContext } from 'primereact/api';
 import { Button } from 'primereact/button';
 import { useContext, useEffect } from 'react';
 
 const SwitchTheme = () => {
    const { changeTheme } = useContext(PrimeReactContext);
-   const { app, setApp } = useApp();
+   const { app, setApp } = useApp(useAppSelector, useAppDispatch);
 
    useEffect(() => {
       if (app.theme === 'light') {

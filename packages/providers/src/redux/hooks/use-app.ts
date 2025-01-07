@@ -1,7 +1,10 @@
+import type { UseDispatch, UseSelector } from 'react-redux';
 import { type AppSlice, _setApp } from '../slices/app';
-import { useAppDispatch, useAppSelector } from '../store';
 
-const useApp = () => {
+const useApp = (
+   useAppSelector: UseSelector<{ app: AppSlice }>,
+   useAppDispatch: UseDispatch,
+) => {
    const app = useAppSelector((state) => state.app);
    const dispatch = useAppDispatch();
 
