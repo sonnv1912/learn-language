@@ -1,6 +1,8 @@
-import type { User } from '@repo/types';
-import { api, queryKey } from '@repo/utils';
-import { useQuery } from '@tanstack/vue-query';
+import { queryKey } from '@packages/providers';
+import type { User } from '@packages/types';
+import { api } from '@packages/utils';
+import { useQuery } from '@tanstack/react-query';
+import { request } from '@utils/request';
 
 const useMyProfile = () => {
    return useQuery({
