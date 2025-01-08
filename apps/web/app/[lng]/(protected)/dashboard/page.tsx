@@ -1,14 +1,14 @@
-import { signIn } from '@utils/auth';
+import { signOut } from '@utils/auth';
 
 const Page = () => {
    return (
       <form
          action={async () => {
             'use server';
-            await signIn('github', { redirectTo: '/dashboard' });
+            await signOut();
          }}
       >
-         <button type='submit'>Sign in</button>
+         <button type='submit'>Sign out</button>
       </form>
    );
 };

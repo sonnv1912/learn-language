@@ -3,12 +3,17 @@ import { APP_NAME } from '@packages/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Logo = () => {
+type Props = {
+   size?: number;
+   textSize?: 'xl' | 'lg' | 'md';
+};
+
+const Logo = ({ size = 40, textSize = 'xl' }: Props) => {
    return (
       <Link href='/' className='flex items-center gap-1'>
-         <Image alt='' src={LogoIcon} width={40} height={40} />
+         <Image alt='' src={LogoIcon} width={size} height={size} />
 
-         <p className='font-bold text-xl'>{APP_NAME}</p>
+         <p className={`font-bold text-${textSize}`}>{APP_NAME}</p>
       </Link>
    );
 };

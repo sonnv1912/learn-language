@@ -1,12 +1,13 @@
 import type { Option } from '@packages/types';
 import { i18n } from '@packages/utils';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
 import { useRef } from 'react';
 
 const UserButton = () => {
    const menuRight = useRef<Menu>(null);
+   const auth = useSession();
 
    const items: Option[] = [
       {
@@ -36,7 +37,8 @@ const UserButton = () => {
          />
 
          <Avatar
-            label='V'
+            label={auth.data?.user.name?.[0]}
+            image={auth.data?.user.image || undefined}
             shape='circle'
             size='large'
             aria-controls='popup_menu_right'

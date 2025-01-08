@@ -8,11 +8,7 @@ import type { PropsWithChildren } from 'react';
 const LayoutBody = ({ children }: PropsWithChildren) => {
    const { app } = useApp(useAppSelector, useAppDispatch);
 
-   return (
-      <div className={clsx('flex flex-col layout min-h-screen', app.theme)}>
-         {children}
-      </div>
-   );
+   return <div className={clsx('layout', app.theme)}>{children}</div>;
 };
 
 export { LayoutBody };

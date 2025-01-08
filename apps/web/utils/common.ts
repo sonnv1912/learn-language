@@ -1,3 +1,7 @@
-const IS_DEV = process.env.NODE_ENV === 'development';
+import { APP_NAME } from '@packages/utils';
 
-export { IS_DEV };
+const pageTitle = (title: string) => {
+   return `${title} — ${APP_NAME}`;
+};
+
+export { pageTitle };

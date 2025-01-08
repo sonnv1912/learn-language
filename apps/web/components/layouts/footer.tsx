@@ -2,10 +2,10 @@ import { Logo } from './logo';
 
 const Footer = () => {
    return (
-      <div className='py-8 border-t border-t-[--surface-border]'>
-         <div className='max-w-screen-lg flex items-center justify-between mx-auto'>
-            <Logo />
-         </div>
+      <div className='py-4 px-10 border-t border-t-[--surface-border] flex items-center justify-between'>
+         <Logo />
+
+         <p>06-08-2024</p>
       </div>
    );
 };

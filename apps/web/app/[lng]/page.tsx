@@ -1,13 +1,13 @@
 'use client';
 
-import { UserLayout } from '@/layouts/user';
+import { DefaultLayout } from '@/layouts/default';
 import { APP_NAME, i18n, route } from '@packages/utils';
 import Link from 'next/link';
 import { Button } from 'primereact/button';
 
 const Page = () => {
    return (
-      <UserLayout>
+      <DefaultLayout>
          <div className='max-w-screen-md flex flex-col gap-5 mx-auto flex-1 py-20'>
             <p className='font-bold text-4xl'>{APP_NAME}</p>
 
@@ -35,7 +35,7 @@ const Page = () => {
                </Link>
             </div>
          </div>
-      </UserLayout>
+      </DefaultLayout>
    );
 };
 

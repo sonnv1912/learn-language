@@ -1,5 +1,11 @@
 {
    "home": {
       "share_with_everyone": "Chia sẽ với mọi người"
+   },
+   "login": {
+      "title": "Đăng nhập"
+   },
+   "register": {
+      "title": "Đăng ký tài khoản"
    }
 }

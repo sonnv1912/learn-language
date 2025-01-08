@@ -1,5 +1,5 @@
-export type ApiResponse<T = null> = {
-   data: T | null;
+export type ApiResponse<T = undefined> = {
+   data?: T | undefined;
    errors: {
       message: string;
       extensions: {
@@ -8,7 +8,7 @@ export type ApiResponse<T = null> = {
    }[];
    ok: boolean;
    status: number;
-};
+} | null;
 
 export type POST = 'post';
 export type DELETE = 'delete';

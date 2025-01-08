@@ -50,7 +50,7 @@ const instance = async <T>({
    if (result) {
       if (!response?.ok) {
          const error: ApiResponse<T> = {
-            data: null,
+            data: undefined,
             ok: false,
             status: response.status,
             errors: result.errors || [{ message: response.statusText }],

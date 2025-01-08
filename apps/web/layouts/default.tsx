@@ -3,16 +3,18 @@ import { Header } from '@components/layouts/header';
 import { LayoutBody } from '@components/layouts/layout-body';
 import type { PropsWithChildren } from 'react';
 
-const UserLayout = ({ children }: PropsWithChildren) => {
+const DefaultLayout = ({ children }: PropsWithChildren) => {
    return (
       <LayoutBody>
-         <Header />
+         <div className='min-h-screen flex flex-col'>
+            <Header />
 
-         <div className='flex-1'>{children}</div>
+            <div className='flex-1'>{children}</div>
 
-         <Footer />
+            <Footer />
+         </div>
       </LayoutBody>
    );
 };
 
-export { UserLayout };
+export { DefaultLayout };
