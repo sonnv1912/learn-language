@@ -13,7 +13,7 @@ const Page = () => {
    const { t } = i18n;
    const loginMutate = useLogin();
 
-   const { control, handleSubmit, formState } = useForm({
+   const { control, handleSubmit } = useForm({
       defaultValues: defaultLoginValue,
       resolver: zodResolver(loginSchema),
    });
@@ -76,7 +76,6 @@ const Page = () => {
                   </Link>
 
                   <Button
-                     disabled={!formState.isValid}
                      className='mt-3'
                      loading={loginMutate.isPending}
                      label={t('common:action.login')}

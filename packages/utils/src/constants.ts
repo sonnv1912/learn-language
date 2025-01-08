@@ -2,7 +2,7 @@ import type { DELETE, GET, PATCH, POST } from '@packages/types';
 
 export const API_BASE_URL = 'http://localhost:8055';
 
-export const APP_NAME = 'LexiFun';
+export const APP_NAME = 'Lexis Fun';
 
 export const ACCESS_TOKEN = 'access_token';
 

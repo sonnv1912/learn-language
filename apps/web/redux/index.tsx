@@ -1,5 +1,6 @@
 'use client';
 
+import { PageLoading } from '@components/ui/page-loading';
 import { ReduxProvider } from '@packages/providers';
 import type { ReactNode } from 'react';
 import { store } from './store';
@@ -10,7 +11,7 @@ type Props = {
 
 const WebReduxProvider = ({ children }: Props) => {
    return (
-      <ReduxProvider loading={'loading'} store={store}>
+      <ReduxProvider loading={<PageLoading />} store={store}>
          {children}
       </ReduxProvider>
    );

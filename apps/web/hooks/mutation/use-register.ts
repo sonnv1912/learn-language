@@ -7,7 +7,7 @@ const useRegister = () => {
 
    return useMutation<boolean, Error, Partial<RegisterSchema>>({
       mutationFn: async (data) => {
-         //  delete data.confirm_password;
+         data.confirm_password = undefined;
 
          await request({
             endpoint: api.register,

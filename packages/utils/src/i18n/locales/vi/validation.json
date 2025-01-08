@@ -1,4 +1,5 @@
 {
-   "invalid_format": "Định dạng {filed} không hợp lệ.",
-   "required": "Vui lòng nhập {field}."
+   "invalid_format": "Định dạng {{field}} không hợp lệ.",
+   "required": "Vui lòng nhập {{field}}.",
+   "not_match": "Không trùng khớp với {{field}}"
 }

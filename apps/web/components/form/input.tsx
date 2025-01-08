@@ -1,4 +1,6 @@
+import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
 import type { FormEvent } from 'react';
 
 type Props = {
@@ -6,15 +8,32 @@ type Props = {
    label?: string;
    placeholder?: string;
    type?: 'string' | 'password';
+   ratePassword?: boolean;
    errorMessage?: string;
    onChange: (value: string) => void;
 };
 
+const header = <div className='font-bold mb-3'>Pick a password</div>;
+const footer = (
+   <>
+      <Divider />
+      <p className='mt-2'>Suggestions</p>
+      <ul className='pl-2 ml-2 mt-0 line-height-3'>
+         <li>At least one lowercase</li>
+         <li>At least one uppercase</li>
+         <li>At least one numeric</li>
+         <li>Minimum 8 characters</li>
+      </ul>
+   </>
+);
+
 const Input = ({
    errorMessage,
    label,
+   type = 'string',
    placeholder,
    value,
+   ratePassword,
    onChange,
 }: Props) => {
    const handleOnChange = (e: FormEvent<HTMLInputElement>) => {
@@ -27,16 +46,35 @@ const Input = ({
       <div className='flex flex-col'>
          <div className='text-md font-semibold mb-2'>{label}</div>
 
-         <InputText
-            value={value}
-            placeholder={placeholder}
-            className='flex-1'
-            onInput={(e) => {
-               handleOnChange(e);
-            }}
-         />
+         {type === 'string' && (
+            <InputText
+               value={value}
+               placeholder={placeholder}
+               invalid={!!errorMessage}
+               className='flex-1'
+               onInput={(e) => {
+                  handleOnChange(e);
+               }}
+            />
+         )}
 
-         <small v-if='errorMessage' className='text-red-500'>
+         {type === 'password' && (
+            <Password
+               value={value}
+               placeholder={placeholder}
+               invalid={!!errorMessage}
+               inputClassName='w-full'
+               feedback={ratePassword}
+               header={header}
+               footer={footer}
+               toggleMask={true}
+               onInput={(e) => {
+                  handleOnChange(e);
+               }}
+            />
+         )}
+
+         <small v-if='errorMessage' className='text-red-500 mt-1'>
             {errorMessage}
          </small>
       </div>

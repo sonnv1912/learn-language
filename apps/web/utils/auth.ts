@@ -1,7 +1,7 @@
 import { getMyProfile } from '@/hooks/query/use-my-profile';
-import type { Login } from '@packages/types';
+import type { ApiResponse, Login } from '@packages/types';
 import { METHOD, api, username } from '@packages/utils';
-import NextAuth, { type DefaultSession } from 'next-auth';
+import NextAuth, { CredentialsSignin, type DefaultSession } from 'next-auth';
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import { JWT } from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
@@ -22,6 +22,16 @@ declare module 'next-auth/jwt' {
       access_token: string;
       refresh_token: string;
       expires: number;
+   }
+}
+
+class CustomError extends CredentialsSignin {
+   code: string;
+
+   constructor(code: string) {
+      super();
+
+      this.code = code;
    }
 }
 
@@ -65,27 +75,33 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             password: {},
          },
          authorize: async (data) => {
-            const loginResponse = await request<Login>({
-               endpoint: api.login,
-               options: {
-                  method: METHOD.post,
-                  body: data,
-               },
-            });
+            try {
+               const loginResponse = await request<Login>({
+                  endpoint: api.login,
+                  options: {
+                     method: METHOD.post,
+                     body: data,
+                  },
+               });
 
-            const profileResponse = await getMyProfile(
-               loginResponse?.data?.access_token,
-            );
+               const profileResponse = await getMyProfile(
+                  loginResponse?.data?.access_token,
+               );
 
-            return {
-               id: profileResponse?.data?.id,
-               email: profileResponse?.data?.email,
-               image: profileResponse?.data?.avatar,
-               name: username(profileResponse?.data),
-               access_token: loginResponse?.data?.access_token,
-               refresh_token: loginResponse?.data?.refresh_token,
-               expires: loginResponse?.data?.expires,
-            };
+               return {
+                  id: profileResponse?.data?.id,
+                  email: profileResponse?.data?.email,
+                  image: profileResponse?.data?.avatar,
+                  name: username(profileResponse?.data),
+                  access_token: loginResponse?.data?.access_token,
+                  refresh_token: loginResponse?.data?.refresh_token,
+                  expires: loginResponse?.data?.expires,
+               };
+            } catch (err) {
+               const error = err as ApiResponse;
+
+               throw new CustomError(error.errors[0]?.message);
+            }
          },
       }),
    ],
