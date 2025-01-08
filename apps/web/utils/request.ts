@@ -8,7 +8,7 @@ const request = async <T>(props: RequestProps) => {
    let token = props.options.token;
 
    try {
-      if (token) {
+      if (!token) {
          if (isServer) {
             const session = await auth();
 

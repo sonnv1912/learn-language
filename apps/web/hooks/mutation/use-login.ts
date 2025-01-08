@@ -6,8 +6,8 @@ import { type LoginSchema, METHOD, api, route } from '@packages/utils';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 import { useMutation } from '@tanstack/react-query';
 import { request } from '@utils/request';
+import { ensureRoute } from '@utils/route';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { getMyProfile } from '../query/use-my-profile';
 
 const login = async (data: LoginSchema) => {
@@ -23,7 +23,6 @@ const login = async (data: LoginSchema) => {
 const useLogin = () => {
    const toast = useAppToast(useAppSelector, useAppDispatch);
    const app = useApp(useAppSelector, useAppDispatch);
-   const router = useRouter();
 
    return useMutation<ApiResponse<Login>, ApiResponse, LoginSchema>({
       mutationFn: async (data) => {
@@ -37,7 +36,7 @@ const useLogin = () => {
          const loginResponse = await signIn('credentials', {
             ...data?.data,
             ...userResponse?.data,
-            redirect: false,
+            redirectTo: ensureRoute(route.dashboard, 'vi'),
          });
 
          if (loginResponse?.code) {
@@ -51,11 +50,10 @@ const useLogin = () => {
 
             return;
          }
+
          app.setApp({
             user: userResponse?.data,
          });
-
-         router.push(route.dashboard);
       },
    });
 };

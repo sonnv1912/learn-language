@@ -57,11 +57,8 @@ const LoginForm = () => {
                )}
             />
 
-            <Link
-               href='/auth/forgot-password'
-               className='text-right text-blue-500 hovertext-blue-700'
-            >
-               {i18n.t('auth:forgot_password')}
+            <Link href='/auth/forgot-password' className='ml-auto'>
+               <Button label={i18n.t('auth:forgot_password')} link={true} />
             </Link>
 
             <Button

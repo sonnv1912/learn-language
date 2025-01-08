@@ -4,9 +4,10 @@ import {
    LANGUAGES,
    privateRoutes,
    route,
+   routesCantAccessWhenLogin,
 } from '@packages/utils';
 import { auth } from '@utils/auth';
-import { ensureRoute, removeLng, validRoute } from '@utils/route';
+import { ensureRoute, removeLng } from '@utils/route';
 import { NextResponse } from 'next/server';
 
 export const config = {
@@ -16,12 +17,25 @@ export const config = {
 };
 
 export default auth((req) => {
+   const response = NextResponse.next();
+
+   if (
+      req.nextUrl.pathname.startsWith('/resources') ||
+      req.nextUrl.pathname.startsWith('/app')
+   ) {
+      return response;
+   }
+
    let lng: string | undefined | null;
 
-   const response = NextResponse.next();
+   const loggedIn = !!req.auth;
    const refererUrl = req.headers.get('referer');
 
    const isPrivateRoute = privateRoutes.includes(
+      removeLng(req.nextUrl.pathname),
+   );
+
+   const isSpecialRoute = routesCantAccessWhenLogin.includes(
       removeLng(req.nextUrl.pathname),
    );
 
@@ -35,26 +49,16 @@ export default auth((req) => {
       response.cookies.set(COOKIE.i18n, lng);
    }
 
-   if (
-      req.nextUrl.pathname.startsWith('/resources') ||
-      req.nextUrl.pathname.startsWith('/app')
-   ) {
-      return response;
+   if (loggedIn && isSpecialRoute) {
+      return NextResponse.redirect(
+         new URL(ensureRoute(route.home, lng), req.url),
+      );
    }
 
-   if (!req.auth && isPrivateRoute) {
-      const newUrl = new URL(ensureRoute(route.login), req.nextUrl.origin);
+   if (!loggedIn && isPrivateRoute) {
+      const newUrl = new URL(ensureRoute(route.login, lng), req.nextUrl.origin);
 
       return Response.redirect(newUrl);
-   }
-
-   if (
-      !validRoute(req.nextUrl.pathname) &&
-      !req.nextUrl.pathname.startsWith('/_next')
-   ) {
-      return NextResponse.redirect(
-         new URL(ensureRoute(req.nextUrl.pathname, lng), req.url),
-      );
    }
 
    if (refererUrl) {
@@ -69,5 +73,5 @@ export default auth((req) => {
       return response;
    }
 
-   return NextResponse.next();
+   return response;
 });

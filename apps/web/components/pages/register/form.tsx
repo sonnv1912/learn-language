@@ -2,13 +2,18 @@
 
 import { useLogin } from '@/hooks/mutation/use-login';
 import { useRegister } from '@/hooks/mutation/use-register';
+import { useAPpRouter } from '@/hooks/use-app-router';
 import { Input } from '@components/form/input';
 import { faker } from '@faker-js/faker';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { defaultRegisterValue, i18n, registerSchema } from '@packages/utils';
+import {
+   defaultRegisterValue,
+   i18n,
+   registerSchema,
+   route,
+} from '@packages/utils';
 import { useIsMutating } from '@tanstack/react-query';
 import { IS_DEV } from '@utils/constants';
-import Link from 'next/link';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Controller, useForm } from 'react-hook-form';
@@ -17,6 +22,7 @@ const RegisterForm = () => {
    const isMutating = useIsMutating();
    const registerMutate = useRegister();
    const loginMutate = useLogin();
+   const router = useAPpRouter();
 
    const { control, handleSubmit } = useForm({
       defaultValues: IS_DEV
@@ -37,6 +43,8 @@ const RegisterForm = () => {
             email: data.email,
             password: data.password,
          });
+
+         router.push(route.home);
       } catch (_error) {
          //
       }
@@ -86,13 +94,6 @@ const RegisterForm = () => {
                   />
                )}
             />
-
-            <Link
-               href='/auth/forgot-password'
-               className='text-right text-blue-500 hover:text-blue-700'
-            >
-               {i18n.t('auth:forgot_password')}
-            </Link>
 
             <Button
                className='mt-3'

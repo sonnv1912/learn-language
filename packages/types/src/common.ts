@@ -7,6 +7,7 @@ type Option<TCode = string, TType = string> = {
    image?: string;
    hide?: boolean;
    badge?: number;
+   url?: string;
    items?: Option[];
    command?: () => void;
 };

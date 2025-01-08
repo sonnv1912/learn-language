@@ -7,5 +7,14 @@
    },
    "register": {
       "title": "Đăng ký tài khoản"
+   },
+   "dashboard": {
+      "title": "Tổng quan"
+   },
+   "profile": {
+      "title": "Trang cá nhân"
+   },
+   "lexis": {
+      "title": "Từ vựng"
    }
 }

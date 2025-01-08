@@ -1,5 +1,6 @@
+import { useAPpRouter } from '@/hooks/use-app-router';
 import type { Option } from '@packages/types';
-import { i18n } from '@packages/utils';
+import { i18n, route } from '@packages/utils';
 import { signOut, useSession } from 'next-auth/react';
 import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
@@ -8,19 +9,27 @@ import { useRef } from 'react';
 const UserButton = () => {
    const menuRight = useRef<Menu>(null);
    const auth = useSession();
+   const router = useAPpRouter();
 
    const items: Option[] = [
       {
          code: 'profile',
          label: i18n.t('common:profile'),
          icon: 'pi pi-user',
+         command: () => {
+            router.push(route.profile);
+         },
       },
       {
          code: 'logout',
          label: i18n.t('common:action.logout'),
          icon: 'pi pi-sign-out',
-         command: () => {
-            signOut();
+         command: async () => {
+            await signOut({
+               redirect: false,
+            });
+
+            router.push(route.home);
          },
       },
    ];

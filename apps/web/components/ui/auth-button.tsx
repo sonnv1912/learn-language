@@ -2,8 +2,8 @@
 
 import { i18n, route } from '@packages/utils';
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { Button } from 'primereact/button';
+import { Link } from './link';
 import { UserButton } from './user-button';
 
 const AuthButton = () => {

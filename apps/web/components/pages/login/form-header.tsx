@@ -1,5 +1,5 @@
+import { Link } from '@components/ui/link';
 import { i18n, route } from '@packages/utils';
-import Link from 'next/link';
 import { Button } from 'primereact/button';
 
 const LoginFormHeader = () => {
