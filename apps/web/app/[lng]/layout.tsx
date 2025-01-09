@@ -12,6 +12,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
@@ -62,17 +63,19 @@ const Layout = async ({
          </head>
 
          <body className='text-[--text-color]'>
-            <SessionProvider>
-               <WebReduxProvider>
-                  <UIProvider>
-                     <QueryProvider>
-                        {children}
+            <NuqsAdapter>
+               <SessionProvider>
+                  <WebReduxProvider>
+                     <UIProvider>
+                        <QueryProvider>
+                           {children}
 
-                        <Toast />
-                     </QueryProvider>
-                  </UIProvider>
-               </WebReduxProvider>
-            </SessionProvider>
+                           <Toast />
+                        </QueryProvider>
+                     </UIProvider>
+                  </WebReduxProvider>
+               </SessionProvider>
+            </NuqsAdapter>
 
             <Analytics debug={false} />
 
