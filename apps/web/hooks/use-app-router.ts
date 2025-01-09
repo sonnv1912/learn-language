@@ -9,13 +9,28 @@ const useAPpRouter = () => {
    return {
       ...router,
       replace: (href: string) => {
-         router.replace(ensureRoute(href, params.lng));
+         router.replace(
+            ensureRoute({
+               route: href,
+               lng: params.lng,
+            }),
+         );
       },
       push: (href: string) => {
-         router.push(ensureRoute(href, params.lng));
+         router.push(
+            ensureRoute({
+               route: href,
+               lng: params.lng,
+            }),
+         );
       },
       prefetch: (href: string) => {
-         router.prefetch(ensureRoute(href, params.lng));
+         router.prefetch(
+            ensureRoute({
+               route: href,
+               lng: params.lng,
+            }),
+         );
       },
    };
 };

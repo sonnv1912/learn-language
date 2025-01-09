@@ -1,6 +1,12 @@
+import 'primeicons/primeicons.css';
+import '../../assets/styles/global.css';
+
 import { UIProvider } from '@/providers/ui-provider';
+import { WebReduxProvider } from '@/redux';
+import { Toast } from '@components/ui/toast';
 import { QueryProvider } from '@packages/providers';
-import { APP_NAME } from '@packages/utils';
+import { i18n } from '@packages/utils';
+import { pageTitle } from '@utils/common';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { dir } from 'i18next';
@@ -8,13 +14,8 @@ import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { ReactNode } from 'react';
 
-import { WebReduxProvider } from '@/redux';
-import { Toast } from '@components/ui/toast';
-import 'primeicons/primeicons.css';
-import '../../assets/styles/global.css';
-
 export const metadata: Metadata = {
-   title: APP_NAME,
+   title: pageTitle(i18n.t('info:slogan')),
 };
 
 const Layout = async ({

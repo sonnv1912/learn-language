@@ -13,6 +13,14 @@ const UserButton = () => {
 
    const items: Option[] = [
       {
+         code: 'dashboard',
+         label: i18n.t('page:dashboard.title'),
+         icon: 'pi pi-home',
+         command: () => {
+            router.push(route.dashboard);
+         },
+      },
+      {
          code: 'profile',
          label: i18n.t('common:profile'),
          icon: 'pi pi-user',

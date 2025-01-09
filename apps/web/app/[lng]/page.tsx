@@ -31,7 +31,7 @@ const Page = () => {
                   </Link>
                )}
 
-               <Link href={route.home}>
+               <Link href={route.social}>
                   <Button
                      label={i18n.t('page:home.share_with_everyone')}
                      icon='pi pi-arrow-up-right'

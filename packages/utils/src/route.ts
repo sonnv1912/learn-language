@@ -1,7 +1,13 @@
 const route = {
+   // public
    home: '/',
+   social: '/social',
+
+   // auth
    login: '/auth/login',
    register: '/auth/register',
+
+   // protected
    dashboard: '/dashboard',
    lexis: '/lexis',
    profile: '/profile',
@@ -9,7 +15,7 @@ const route = {
 
 const authRoutes = [route.login, route.register];
 
-const publicRoutes = [route.home];
+const publicRoutes = [route.home, route.social];
 
 const privateRoutes = [route.dashboard, route.lexis];
 

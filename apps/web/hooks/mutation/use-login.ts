@@ -36,7 +36,10 @@ const useLogin = () => {
          const loginResponse = await signIn('credentials', {
             ...data?.data,
             ...userResponse?.data,
-            redirectTo: ensureRoute(route.dashboard, 'vi'),
+            redirectTo: ensureRoute({
+               route: route.dashboard,
+               lng: 'vi',
+            }),
          });
 
          if (loginResponse?.code) {

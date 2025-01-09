@@ -51,12 +51,24 @@ export default auth((req) => {
 
    if (loggedIn && isSpecialRoute) {
       return NextResponse.redirect(
-         new URL(ensureRoute(route.home, lng), req.url),
+         new URL(
+            ensureRoute({
+               lng,
+               route: route.home,
+            }),
+            req.url,
+         ),
       );
    }
 
    if (!loggedIn && isPrivateRoute) {
-      const newUrl = new URL(ensureRoute(route.login, lng), req.nextUrl.origin);
+      const newUrl = new URL(
+         ensureRoute({
+            lng,
+            route: route.login,
+         }),
+         req.nextUrl.origin,
+      );
 
       return Response.redirect(newUrl);
    }

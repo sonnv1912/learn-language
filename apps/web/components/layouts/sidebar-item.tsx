@@ -33,7 +33,11 @@ const SidebarItem = ({ data }: Props) => {
                'hover:text-[--primary-color] hover:bg-[--surface-hover]',
                {
                   'bg-[--surface-hover] text-[--primary-color]':
-                     pathname === ensureRoute(data.url, params.lng),
+                     pathname ===
+                     ensureRoute({
+                        route: data.url || '#',
+                        lng: params.lng,
+                     }),
                },
             )}
             onClick={() => {

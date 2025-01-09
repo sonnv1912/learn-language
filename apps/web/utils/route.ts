@@ -1,10 +1,18 @@
+import { DEFAULT_LNG } from '@packages/utils';
+
 const pattern = /^(\/?(vi)(\/|$))/;
 
-function validRoute(route?: string) {
-   return pattern.test(route || '');
+function validRoute(route: string) {
+   return pattern.test(route);
 }
 
-function ensureRoute(route?: string, lng?: string) {
+function ensureRoute({
+   route,
+   lng = DEFAULT_LNG,
+}: {
+   route: string;
+   lng: string;
+}) {
    if (validRoute(route)) {
       return route;
    }

@@ -15,7 +15,13 @@ const Link = ({ href, children, ...rest }: Props) => {
    const params = useAppParams();
 
    return (
-      <NextLink href={ensureRoute(href, params.lng)} {...rest}>
+      <NextLink
+         href={ensureRoute({
+            lng: params.lng,
+            route: href,
+         })}
+         {...rest}
+      >
          {children}
       </NextLink>
    );
