@@ -1,63 +1,53 @@
 'use client';
 
+import { useLexisItemContext } from '@components/pattern/lexis-item';
+import { LexisItemAction } from '@components/pattern/lexis-item/action';
+import { LexisItemDateCreated } from '@components/pattern/lexis-item/date-created';
+import { LexisItemDescription } from '@components/pattern/lexis-item/description';
+import { LexisItemExample } from '@components/pattern/lexis-item/example';
+import { LexisItemImage } from '@components/pattern/lexis-item/image';
+import { LexisItemLanguage } from '@components/pattern/lexis-item/language';
+import { LexisItemTag } from '@components/pattern/lexis-item/tag';
+import { LexisItemTranslate } from '@components/pattern/lexis-item/translate';
 import clsx from 'clsx';
 import { motion } from 'motion/react';
-import { Avatar } from 'primereact/avatar';
 import { Divider } from 'primereact/divider';
-import { useState } from 'react';
-import { LexisItemAction } from './item-action';
-import { LexisItemExample } from './item-example';
-import { LexisItemTag } from './item-tag';
 
-type Props = {
-   data: string;
-   onPressTrash: () => void;
-};
-
-const LexisItem = ({ data, onPressTrash }: Props) => {
-   const [collapse, setCollapse] = useState(true);
+const LexisItem = () => {
+   const edit = useLexisItemContext((state) => state.edit);
 
    return (
       <motion.div
          layout={true}
-         key={data}
-         exit={{
-            opacity: 0,
-            scale: 0,
-         }}
-         className={clsx('overflow-hidden p-card pt-4 h-fit border ', {
-            'border-transparent': collapse,
-            'shadow-[--focus-ring]': !collapse,
-         })}
+         initial={{ opacity: 1, scale: 1 }}
+         exit={{ opacity: 0, scale: 0.4 }}
+         className={clsx(
+            'overflow-hidden p-card shadow-none pt-4 flex flex-col',
+         )}
       >
-         <div className='flex px-4 gap-4'>
-            <Avatar label='B' size='large' shape='circle' />
+         <div className='flex flex-1 px-4 gap-4'>
+            <LexisItemImage />
 
             <div className='flex-1 flex flex-col gap-3'>
                <div className='flex items-center'>
-                  <p className='font-semibold text-xl flex-1'>{data}</p>
+                  <LexisItemLanguage />
 
-                  <LexisItemAction
-                     onPressTrash={onPressTrash}
-                     onPressCollapse={() => {
-                        setCollapse((prev) => !prev);
-                     }}
-                  />
+                  <LexisItemAction />
                </div>
 
-               <p className='leading-7'>Quả chuối</p>
+               <LexisItemTranslate />
 
-               <p className='leading-7'>Một loại hoa quả màu vàng, khá ngon</p>
+               <LexisItemDescription />
 
                <LexisItemTag />
             </div>
          </div>
 
          <Divider align='right'>
-            <p className='text-sm text-gray-400 ml-auto'>06/08/2024</p>
+            <LexisItemDateCreated />
          </Divider>
 
-         <LexisItemExample collapse={collapse} />
+         {edit && <LexisItemExample />}
       </motion.div>
    );
 };

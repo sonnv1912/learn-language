@@ -11,9 +11,11 @@ type Props = {
    icon?: string;
    placeholder?: string;
    type?: 'string' | 'password';
+
    ratePassword?: boolean;
    errorMessage?: string;
    onChange: (value: string) => void;
+   onBlur?: (value: string) => void;
 };
 
 const header = <div className='font-bold mb-3'>Pick a password</div>;
@@ -42,11 +44,17 @@ const Input = ({
    value,
    ratePassword,
    onChange,
+   onBlur,
 }: Props) => {
    const handleOnChange = (e: FormEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
 
       onChange(target.value);
+   };
+   const handleOnBlur = (e: FormEvent<HTMLInputElement>) => {
+      const target = e.target as HTMLInputElement;
+
+      onBlur?.(target.value);
    };
 
    return (
@@ -62,6 +70,9 @@ const Input = ({
                   placeholder={placeholder}
                   invalid={!!errorMessage}
                   className='flex-1'
+                  onBlur={(e) => {
+                     handleOnBlur(e);
+                  }}
                   onInput={(e) => {
                      handleOnChange(e);
                   }}
@@ -71,10 +82,14 @@ const Input = ({
 
          {type === 'string' && !icon && (
             <InputText
+               autoFocus={true}
                value={value}
                placeholder={placeholder}
                invalid={!!errorMessage}
                className='flex-1'
+               onBlur={(e) => {
+                  handleOnBlur(e);
+               }}
                onInput={(e) => {
                   handleOnChange(e);
                }}
@@ -91,6 +106,9 @@ const Input = ({
                header={header}
                footer={footer}
                toggleMask={true}
+               onBlur={(e) => {
+                  handleOnBlur(e);
+               }}
                onInput={(e) => {
                   handleOnChange(e);
                }}

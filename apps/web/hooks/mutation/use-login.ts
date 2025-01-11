@@ -1,9 +1,8 @@
 'use client';
 
-import { useApp, useAppToast } from '@packages/providers';
+import { useToast, useWebApp } from '@packages/hooks';
 import type { ApiResponse, Login } from '@packages/types';
 import { type LoginSchema, METHOD, api, route } from '@packages/utils';
-import { useAppDispatch, useAppSelector } from '@redux/store';
 import { useMutation } from '@tanstack/react-query';
 import { request } from '@utils/request';
 import { ensureRoute } from '@utils/route';
@@ -21,8 +20,8 @@ const login = async (data: LoginSchema) => {
 };
 
 const useLogin = () => {
-   const toast = useAppToast(useAppSelector, useAppDispatch);
-   const app = useApp(useAppSelector, useAppDispatch);
+   const toast = useToast();
+   const { setUser } = useWebApp();
 
    return useMutation<ApiResponse<Login>, ApiResponse, LoginSchema>({
       mutationFn: async (data) => {
@@ -33,7 +32,7 @@ const useLogin = () => {
       onSuccess: async (data) => {
          const userResponse = await getMyProfile(data?.data?.access_token);
 
-         const loginResponse = await signIn('credentials', {
+         await signIn('credentials', {
             ...data?.data,
             ...userResponse?.data,
             redirectTo: ensureRoute({
@@ -42,21 +41,18 @@ const useLogin = () => {
             }),
          });
 
-         if (loginResponse?.code) {
-            toast.show([
-               {
-                  code: loginResponse?.error || '',
-                  label: loginResponse?.code,
+         setUser(userResponse?.data);
+      },
+      onError(error) {
+         if (error?.errors) {
+            toast.show(
+               error?.errors.map((t) => ({
+                  code: t.extensions.code,
+                  label: t.message,
                   type: 'error',
-               },
-            ]);
-
-            return;
+               })),
+            );
          }
-
-         app.setApp({
-            user: userResponse?.data,
-         });
       },
    });
 };

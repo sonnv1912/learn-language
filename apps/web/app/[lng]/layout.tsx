@@ -2,7 +2,6 @@ import 'primeicons/primeicons.css';
 import '../../assets/styles/global.css';
 
 import { UIProvider } from '@/providers/ui-provider';
-import { WebReduxProvider } from '@/redux';
 import { Toast } from '@components/ui/toast';
 import { QueryProvider } from '@packages/providers';
 import { i18n } from '@packages/utils';
@@ -65,15 +64,13 @@ const Layout = async ({
          <body className='text-[--text-color]'>
             <NuqsAdapter>
                <SessionProvider>
-                  <WebReduxProvider>
-                     <UIProvider>
-                        <QueryProvider>
-                           {children}
+                  <UIProvider>
+                     <QueryProvider>
+                        {children}
 
-                           <Toast />
-                        </QueryProvider>
-                     </UIProvider>
-                  </WebReduxProvider>
+                        <Toast />
+                     </QueryProvider>
+                  </UIProvider>
                </SessionProvider>
             </NuqsAdapter>
 

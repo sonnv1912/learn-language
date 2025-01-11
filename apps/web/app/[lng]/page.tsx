@@ -1,6 +1,7 @@
 'use client';
 
 import { DefaultLayout } from '@/layouts/default';
+import { ClientOnly } from '@components/ui/client-only';
 import { Link } from '@components/ui/link';
 import { APP_NAME, i18n, route } from '@packages/utils';
 import { useSession } from 'next-auth/react';
@@ -20,25 +21,27 @@ const Page = () => {
                "{i18n.t('info:slogan')}"
             </p>
 
-            <div className='flex items-center gap-4 justify-end'>
-               {!auth.data && (
-                  <Link href={route.register}>
+            <ClientOnly>
+               <div className='flex items-center gap-4 justify-end'>
+                  {!auth.data && (
+                     <Link href={route.register}>
+                        <Button
+                           label={i18n.t('auth:sign_up_now')}
+                           icon='pi pi-arrow-right'
+                           iconPos='right'
+                        />
+                     </Link>
+                  )}
+
+                  <Link href={route.social}>
                      <Button
-                        label={i18n.t('auth:sign_up_now')}
-                        icon='pi pi-arrow-right'
+                        label={i18n.t('page:home.share_with_everyone')}
+                        icon='pi pi-arrow-up-right'
                         iconPos='right'
                      />
                   </Link>
-               )}
-
-               <Link href={route.social}>
-                  <Button
-                     label={i18n.t('page:home.share_with_everyone')}
-                     icon='pi pi-arrow-up-right'
-                     iconPos='right'
-                  />
-               </Link>
-            </div>
+               </div>
+            </ClientOnly>
          </div>
       </DefaultLayout>
    );

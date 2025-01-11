@@ -1,14 +1,13 @@
 'use client';
 
-import { useApp } from '@packages/providers';
-import { useAppDispatch, useAppSelector } from '@redux/store';
+import { useWebApp } from '@packages/hooks';
 import clsx from 'clsx';
 import type { PropsWithChildren } from 'react';
 
 const LayoutBody = ({ children }: PropsWithChildren) => {
-   const { app } = useApp(useAppSelector, useAppDispatch);
+   const theme = useWebApp((state) => state.theme);
 
-   return <div className={clsx('layout', app.theme)}>{children}</div>;
+   return <div className={clsx('layout', theme)}>{children}</div>;
 };
 
 export { LayoutBody };

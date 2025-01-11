@@ -19,7 +19,6 @@
          }
       ],
       "paths": {
-         "@redux/*": ["./redux/*"],
          "@components/*": ["./components/*"],
          "@utils/*": ["./utils/*"],
          "@/*": ["./*"]

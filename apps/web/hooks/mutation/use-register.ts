@@ -1,12 +1,11 @@
-import { useAppToast } from '@packages/providers';
+import { useToast } from '@packages/hooks';
 import type { ApiResponse } from '@packages/types';
 import { METHOD, type RegisterSchema, api } from '@packages/utils';
-import { useAppDispatch, useAppSelector } from '@redux/store';
 import { useMutation } from '@tanstack/react-query';
 import { request } from '@utils/request';
 
 const useRegister = () => {
-   const toast = useAppToast(useAppSelector, useAppDispatch);
+   const toast = useToast();
 
    return useMutation<boolean, ApiResponse, Partial<RegisterSchema>>({
       mutationFn: async (data) => {

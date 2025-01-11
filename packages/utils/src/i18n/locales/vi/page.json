@@ -16,6 +16,10 @@
    },
    "lexis": {
       "title": "Từ vựng",
-      "search_learned_word": "Tìm từ đã học"
+      "search_learned_word": "Tìm từ đã học",
+
+      "message": {
+         "confirm_delete": "Bạn có chắc muốn xóa từ '{{word}}' ???"
+      }
    }
 }

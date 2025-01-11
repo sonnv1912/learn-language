@@ -1,14 +1,13 @@
 'use client';
 
-import { type ToastSlice, useAppToast } from '@packages/providers';
-import { useAppDispatch, useAppSelector } from '@redux/store';
+import { type Toast as ToastType, useToast } from '@packages/hooks';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from 'primereact/button';
 import { useMountEffect, useTimeout, useUnmountEffect } from 'primereact/hooks';
 
-const Item = ({ data }: { data: ToastSlice }) => {
-   const { close } = useAppToast(useAppSelector, useAppDispatch);
+const Item = ({ data }: { data: ToastType }) => {
+   const { close } = useToast();
 
    const [clearTimeout] = useTimeout(() => {
       close(data.code);
@@ -57,7 +56,7 @@ const Item = ({ data }: { data: ToastSlice }) => {
 };
 
 const Toast = () => {
-   const { items } = useAppToast(useAppSelector, useAppDispatch);
+   const toast = useToast((state) => state.toast);
 
    return (
       <div
@@ -65,7 +64,7 @@ const Toast = () => {
          className='p-toast p-component fixed top-5 right-5 z-50'
       >
          <AnimatePresence mode='sync'>
-            {items.map((item) => (
+            {toast?.map((item) => (
                <motion.div
                   key={item.code}
                   layout={true}

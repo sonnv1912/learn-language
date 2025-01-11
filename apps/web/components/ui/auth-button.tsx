@@ -3,6 +3,8 @@
 import { i18n, route } from '@packages/utils';
 import { useSession } from 'next-auth/react';
 import { Button } from 'primereact/button';
+import { Skeleton } from 'primereact/skeleton';
+import { ClientOnly } from './client-only';
 import { Link } from './link';
 import { UserButton } from './user-button';
 
@@ -10,7 +12,7 @@ const AuthButton = () => {
    const session = useSession();
 
    return (
-      <>
+      <ClientOnly fallback={<Skeleton size='3rem' className='rounded-full' />}>
          {session.status === 'authenticated' ? (
             <UserButton v-if='isLogin' />
          ) : (
@@ -31,7 +33,7 @@ const AuthButton = () => {
                </Link>
             </div>
          )}
-      </>
+      </ClientOnly>
    );
 };
 

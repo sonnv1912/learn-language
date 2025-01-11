@@ -1,4 +1,4 @@
-type Option<TCode = string, TType = string> = {
+export type Option<TCode = string, TType = string> = {
    code: TCode;
    label?: string;
    type?: TType;
@@ -12,4 +12,6 @@ type Option<TCode = string, TType = string> = {
    command?: () => void;
 };
 
-export type { Option };
+export type AppTheme = 'dark' | 'light';
+
+export type Toast = Option<string, 'error' | 'success' | 'info'>;

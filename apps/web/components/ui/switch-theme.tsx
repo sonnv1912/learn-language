@@ -1,47 +1,43 @@
-import { useApp } from '@packages/providers';
-import { useAppDispatch, useAppSelector } from '@redux/store';
+import { useWebApp } from '@packages/hooks';
 import { PrimeReactContext } from 'primereact/api';
 import { Button } from 'primereact/button';
 import { useContext, useEffect } from 'react';
 
 const SwitchTheme = () => {
    const { changeTheme } = useContext(PrimeReactContext);
-   const { app, setApp } = useApp(useAppSelector, useAppDispatch);
+   const theme = useWebApp((state) => state.theme);
+   const setTheme = useWebApp((state) => state.setTheme);
 
    useEffect(() => {
-      if (app.theme === 'light') {
+      if (theme === 'light') {
          changeTheme?.('dark', 'light', 'theme');
 
          return;
       }
 
       changeTheme?.('light', 'dark', 'theme');
-   }, [app.theme, changeTheme]);
+   }, [theme, changeTheme]);
 
    return (
       <>
-         {app.theme === 'light' && (
+         {theme === 'light' && (
             <Button
                icon='pi pi-moon'
                rounded={true}
                text={true}
                onClick={() => {
-                  setApp({
-                     theme: 'dark',
-                  });
+                  setTheme?.('dark');
                }}
             />
          )}
 
-         {app.theme === 'dark' && (
+         {theme === 'dark' && (
             <Button
                icon='pi pi-sun'
                rounded={true}
                text={true}
                onClick={() => {
-                  setApp({
-                     theme: 'light',
-                  });
+                  setTheme?.('light');
                }}
             />
          )}

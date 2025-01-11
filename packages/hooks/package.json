@@ -14,7 +14,9 @@
    },
    "dependencies": {
       "@packages/utils": "*",
-      "@tanstack/react-query": "^5.62.15"
+      "@tanstack/react-query": "^5.62.15",
+      "immer": "^10.1.1",
+      "react": "^19.0.0"
    },
    "devDependencies": {
       "@packages/types": "*",
